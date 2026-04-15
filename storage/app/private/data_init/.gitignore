@@ -1,0 +1,5 @@
+*
+!core_config.sql
+!channels.sql
+!themes.sql
+!.gitignore

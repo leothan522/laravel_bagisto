@@ -184,4 +184,15 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | VARIABLES DE ENTORNO PROPIAS
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    'root_name' => env('ROOT_NAME', 'Administrador'),
+    'root_email' => env('ROOT_EMAIL', 'admin@ejemplo.com'),
+    'root_password' => env('ROOT_PASSWORD', 'admin123'),
+
 ];

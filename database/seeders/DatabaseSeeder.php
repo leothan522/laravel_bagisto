@@ -14,6 +14,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(BagistoDatabaseSeeder::class);
+        $this->call([
+            BagistoDatabaseSeeder::class,
+            AdminUserSeeder::class,
+            StoreConfigurationSeeder::class,
+            ChannelSeeder::class,
+            ThemeSeeder::class,
+        ]);
     }
 }
