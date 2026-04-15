@@ -34,7 +34,6 @@ opencode.json
 /public/hot
 /public/storage
 /public/vendor
-/lang/vendor
 skills-lock.json
 /storage/*.key
 /storage/dcc-data/

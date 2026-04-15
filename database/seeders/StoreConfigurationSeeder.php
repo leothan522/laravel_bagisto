@@ -23,7 +23,7 @@ class StoreConfigurationSeeder extends Seeder
             // Leemos el contenido del archivo
             $sql = File::get($path);
 
-            $copyrigth = config('app.name').' '.date('Y');
+            $copyrigth = '© '.config('app.name').' '.date('Y');
 
             $sql = str_replace('{{APP_NAME}}', $copyrigth, $sql);
 
