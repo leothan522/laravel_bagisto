@@ -257,6 +257,131 @@
 
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.grand_total.after') !!}
 
+    {{--<div
+        v-show="cart.payment_method && (cart.payment_method.method === 'moneytransfer' || cart.payment_method === 'moneytransfer')"
+        class="mt-4 p-4 border border-dashed border-zinc-300 rounded-xl bg-zinc-50"
+        style="display: none;"
+    >
+        <h3 class="text-[11px] font-bold uppercase text-zinc-600 mb-3 tracking-widest">
+            Información de Pago
+        </h3>
+
+        <div class="space-y-2 text-sm">
+            <div class="flex justify-between">
+                <span class="text-zinc-500 text-xs">Banco:</span>
+                <span class="font-medium text-zinc-900">{{ config('app.bank_details.banco') }}</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-zinc-500 text-xs">Titular:</span>
+                <span class="font-medium text-zinc-900">{{ config('app.bank_details.titular') }}</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-zinc-500 text-xs">N° Cuenta:</span>
+                <span class="font-mono text-xs text-zinc-900">{{ config('app.bank_details.cuenta') }}</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-zinc-500 text-xs">Cédula/RIF:</span>
+                <span class="font-medium text-zinc-900">{{ config('app.bank_details.rif') }}</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-zinc-500 text-xs">Teléfono (Pago Móvil):</span>
+                <span class="font-medium text-zinc-900">{{ config('app.bank_details.telefono') }}</span>
+            </div>
+        </div>
+    </div>--}}
+
+    <div
+        v-show="cart.payment_method && (cart.payment_method.method === 'moneytransfer' || cart.payment_method === 'moneytransfer')"
+        class="mt-4 p-4 border border-dashed border-zinc-300 rounded-xl bg-zinc-50"
+        style="display: none;"
+    >
+        <h3 class="text-[11px] font-bold uppercase text-zinc-600 mb-3 tracking-widest">
+            Información de Pago
+        </h3>
+
+        <div class="space-y-3 text-sm">
+            <div class="flex justify-between items-center group">
+                <span class="text-zinc-500 text-xs">Titular:</span>
+                <div class="flex items-center gap-2">
+                    <span class="font-medium text-zinc-900">{{ config('app.bank_details.titular') }}</span>
+                    <button
+                        type="button"
+                        data-copy="{{ config('app.bank_details.titular') }}"
+                        class="flex items-center gap-1 text-zinc-400 hover:text-navyBlue transition-all"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                        </svg>
+
+                        <span class="hidden text-[10px] font-bold uppercase" style="color: #16a34a;">
+                        ¡Copiado!
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center group">
+                <span class="text-zinc-500 text-xs">N° Cuenta:</span>
+                <div class="flex items-center gap-2">
+                    <span class="font-mono text-xs text-zinc-900">{{ config('app.bank_details.cuenta') }}</span>
+                    <button
+                        type="button"
+                        data-copy="{{ config('app.bank_details.cuenta') }}"
+                        class="flex items-center gap-1 text-zinc-400 hover:text-navyBlue transition-all"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                        </svg>
+
+                        <span class="hidden text-[10px] font-bold uppercase" style="color: #16a34a;">
+                        ¡Copiado!
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center group">
+                <span class="text-zinc-500 text-xs">Cédula/RIF:</span>
+                <div class="flex items-center gap-2">
+                    <span class="font-medium text-zinc-900">{{ config('app.bank_details.rif') }}</span>
+                    <button
+                        type="button"
+                        data-copy="{{ config('app.bank_details.rif') }}"
+                        class="flex items-center gap-1 text-zinc-400 hover:text-navyBlue transition-all"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                        </svg>
+
+                        <span class="hidden text-[10px] font-bold uppercase" style="color: #16a34a;">
+                        ¡Copiado!
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center group">
+                <span class="text-zinc-500 text-xs">Teléfono:</span>
+                <div class="flex items-center gap-2">
+                    <span class="font-medium text-zinc-900">{{ config('app.bank_details.telefono') }}</span>
+                    <button
+                        type="button"
+                        data-copy="{{ config('app.bank_details.telefono') }}"
+                        class="flex items-center gap-1 text-zinc-400 hover:text-navyBlue transition-all"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                        </svg>
+
+                        <span class="hidden text-[10px] font-bold uppercase" style="color: #16a34a;">
+                        ¡Copiado!
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div
         {{--v-if="cart.payment_method && (typeof cart.payment_method === 'object' ? cart.payment_method.method === 'moneytransfer' : cart.payment_method === 'moneytransfer')"
         class="mt-4 p-4 border border-dashed border-zinc-300 rounded-xl bg-zinc-50"--}}
@@ -308,7 +433,7 @@
                         step="0.01"
                         v-model="cart.bank_amount"
                         class="block w-full py-2 px-3 border border-zinc-200 rounded-lg text-sm focus:border-navyBlue focus:ring-0 outline-none"
-                        :placeholder="cart.grand_total"
+                        :placeholder="Number(cart.grand_total).toFixed(2)"
                     >
                 </div>
             </div>
@@ -324,3 +449,77 @@
     </div>
 
 </div>
+
+{{--@pushOnce('scripts')
+    <script>
+        document.addEventListener('click', function (e) {
+            // Detectar el clic en cualquier elemento que tenga data-copy
+            const target = e.target.closest('[data-copy]');
+
+            if (target) {
+                const textToCopy = target.getAttribute('data-copy');
+
+                if (!navigator.clipboard) {
+                    const textArea = document.createElement("textarea");
+                    textArea.value = textToCopy;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(textArea);
+                } else {
+                    navigator.clipboard.writeText(textToCopy);
+                }
+
+                // Feedback visual
+                const span = target.querySelector('span');
+                if (span) {
+                    const originalText = span.innerText;
+                    span.innerText = '¡Copiado!';
+                    span.style.color = '#16a34a'; // verde-600
+
+                    setTimeout(() => {
+                        span.innerText = originalText;
+                        span.style.color = '';
+                    }, 2000);
+                }
+            }
+        });
+    </script>
+@endPushOnce--}}
+
+@pushOnce('scripts')
+    <script>
+        document.addEventListener('click', function (e) {
+            const target = e.target.closest('[data-copy]');
+
+            if (target) {
+                const textToCopy = target.getAttribute('data-copy');
+                const svg = target.querySelector('svg');
+                const span = target.querySelector('span');
+
+                // Lógica de copiado
+                if (!navigator.clipboard) {
+                    const textArea = document.createElement("textarea");
+                    textArea.value = textToCopy;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(textArea);
+                } else {
+                    navigator.clipboard.writeText(textToCopy);
+                }
+
+                // Efecto Visual con color verde asegurado
+                if (svg && span) {
+                    svg.style.display = 'none';      // Oculta icono
+                    span.style.display = 'inline';   // Muestra texto
+
+                    setTimeout(() => {
+                        span.style.display = 'none';  // Oculta texto
+                        svg.style.display = 'inline'; // Muestra icono
+                    }, 2000);
+                }
+            }
+        });
+    </script>
+@endPushOnce

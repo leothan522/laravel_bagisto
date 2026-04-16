@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('orders', function (Blueprint $table) {
             $table->string('bank_name')->after('applied_cart_rule_ids')->nullable();
             $table->string('bank_reference')->after('bank_name')->nullable();
-            $table->decimal('bank_amount', 12, 2)->after('bank_amount')->nullable();
+            $table->decimal('bank_amount', 12, 4)->after('bank_reference')->nullable();
         });
     }
 

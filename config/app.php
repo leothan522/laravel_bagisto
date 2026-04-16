@@ -195,4 +195,12 @@ return [
     'root_email' => env('ROOT_EMAIL', 'admin@ejemplo.com'),
     'root_password' => env('ROOT_PASSWORD', 'admin123'),
 
+    'bank_details' => [
+        'banco' => env('MONEY_TRANSFER_BANCO'),
+        'titular' => env('MONEY_TRANSFER_TITULAR'),
+        'cuenta' => env('MONEY_TRANSFER_CUENTA'),
+        'rif' => env('MONEY_TRANSFER_RIF'),
+        'telefono' => env('MONEY_TRANSFER_TELEFONO'),
+    ],
+
 ];
