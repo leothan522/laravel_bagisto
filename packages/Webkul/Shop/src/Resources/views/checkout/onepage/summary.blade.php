@@ -80,7 +80,7 @@
                 @{{ cart.formatted_sub_total }}
             </p>
         </div>
-        
+
         <div class="flex justify-between text-right">
             <p class="text-base max-sm:text-sm">
                 @lang('shop::app.checkout.onepage.summary.sub-total-incl-tax')
@@ -133,7 +133,7 @@
 
     <!-- Shipping Rates -->
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.delivery_charges.before') !!}
-        
+
     <template v-if="displayTax.shipping == 'including_tax'">
         <div class="flex justify-between text-right">
             <p class="text-base max-sm:text-sm">
@@ -156,7 +156,7 @@
                 @{{ cart.formatted_shipping_amount }}
             </p>
         </div>
-        
+
         <div class="flex justify-between text-right">
             <p class="text-base max-sm:text-sm">
                 @lang('shop::app.checkout.onepage.summary.delivery-charges-incl-tax')
@@ -213,7 +213,7 @@
 
             <p class="flex items-center gap-1 text-base font-medium max-sm:text-sm">
                 @{{ cart.formatted_tax_total }}
-                
+
                 <span
                     class="text-xl"
                     :class="{'icon-arrow-up': cart.show_taxes, 'icon-arrow-down': ! cart.show_taxes}"
@@ -256,4 +256,71 @@
     </div>
 
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.grand_total.after') !!}
+
+    <div
+        {{--v-if="cart.payment_method && (typeof cart.payment_method === 'object' ? cart.payment_method.method === 'moneytransfer' : cart.payment_method === 'moneytransfer')"
+        class="mt-4 p-4 border border-dashed border-zinc-300 rounded-xl bg-zinc-50"--}}
+        v-show="cart.payment_method && (cart.payment_method.method === 'moneytransfer' || cart.payment_method === 'moneytransfer')"
+        class="mt-4 p-4 border border-dashed border-zinc-300 rounded-xl bg-zinc-50"
+        style="display: none;"
+    >
+        <div class="grid gap-4">
+            <p class="text-sm font-bold text-navyBlue uppercase tracking-wide">
+                @lang('Datos de la Transferencia')
+            </p>
+
+            <div class="grid gap-1.5">
+                <label class="text-[11px] font-bold uppercase text-zinc-600 required">
+                    @lang('Banco de Origen')
+                </label>
+                <select
+                    v-model="cart.bank_name"
+                    class="block w-full py-2 px-3 border border-zinc-200 rounded-lg text-sm bg-white focus:border-navyBlue focus:ring-0 outline-none"
+                >
+                    <option value="">@lang('Seleccione un banco')</option>
+                    <option value="Banesco">Banesco</option>
+                    <option value="Mercantil">Mercantil</option>
+                    <option value="Provincial">Provincial</option>
+                    <option value="BDV">Banco de Venezuela</option>
+                    <option value="Otro">Otro / Pago Móvil</option>
+                </select>
+            </div>
+
+            <div class="flex gap-4">
+                <div class="grid gap-1.5 w-1/2">
+                    <label class="text-[11px] font-bold uppercase text-zinc-600 required">
+                        @lang('Referencia')
+                    </label>
+                    <input
+                        type="text"
+                        v-model="cart.bank_reference"
+                        class="block w-full py-2 px-3 border border-zinc-200 rounded-lg text-sm focus:border-navyBlue focus:ring-0 outline-none"
+                        placeholder="Ej: 001234"
+                    >
+                </div>
+
+                <div class="grid gap-1.5 w-1/2">
+                    <label class="text-[11px] font-bold uppercase text-zinc-600 required">
+                        @lang('Monto Pagado')
+                    </label>
+                    <input
+                        type="number"
+                        step="0.01"
+                        v-model="cart.bank_amount"
+                        class="block w-full py-2 px-3 border border-zinc-200 rounded-lg text-sm focus:border-navyBlue focus:ring-0 outline-none"
+                        :placeholder="cart.grand_total"
+                    >
+                </div>
+            </div>
+
+            <span
+                v-if="!cart.bank_reference || !cart.bank_name || !cart.bank_amount"
+                class="text-[10px] text-red-600 font-medium bg-red-50 p-2 rounded-md border border-red-100"
+            >
+            <i class="icon-information text-sm"></i>
+            @lang('Todos los campos de pago son obligatorios para procesar su orden.')
+        </span>
+        </div>
+    </div>
+
 </div>

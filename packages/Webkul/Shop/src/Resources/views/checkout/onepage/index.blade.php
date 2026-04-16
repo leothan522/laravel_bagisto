@@ -123,7 +123,7 @@
                                     type="button"
                                     class="primary-button w-max rounded-2xl bg-navyBlue px-11 py-3 max-md:mb-4 max-md:w-full max-md:max-w-full max-md:rounded-lg max-sm:py-1.5"
                                     :title="trans('shop::app.checkout.onepage.summary.place-order')"
-                                    ::disabled="isPlacingOrder"
+                                    ::disabled="isPlacingOrder || (cart.payment_method && (cart.payment_method == 'moneytransfer' || cart.payment_method.method == 'moneytransfer') && (!cart.bank_name || !cart.bank_reference || !cart.bank_amount))"
                                     ::loading="isPlacingOrder"
                                     @click="placeOrder"
                                 />
@@ -146,7 +146,7 @@
                             prices: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_prices') }}",
 
                             subtotal: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_subtotal') }}",
-                            
+
                             shipping: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_shipping_amount') }}",
                         },
 
@@ -221,7 +221,20 @@
                     placeOrder() {
                         this.isPlacingOrder = true;
 
-                        this.$axios.post('{{ route('shop.checkout.onepage.orders.store') }}')
+                        // Preparamos los datos adicionales
+                        let paymentData = {};
+
+                        // Verificamos si es transferencia
+                        if (this.cart.payment_method == 'moneytransfer' || this.cart.payment_method?.method == 'moneytransfer') {
+                            paymentData = {
+                                bank_name: this.cart.bank_name,
+                                bank_reference: this.cart.bank_reference,
+                                bank_amount: this.cart.bank_amount,
+                            };
+                        }
+
+                        // CRÍTICO: Pasamos paymentData como segundo argumento
+                        this.$axios.post('{{ route('shop.checkout.onepage.orders.store') }}', paymentData)
                             .then(response => {
                                 if (response.data.data.redirect) {
                                     window.location.href = response.data.data.redirect_url;
