@@ -467,7 +467,14 @@
                             v-model="cart.bank_amount"
                             @input="cart.bank_amount = cart.bank_amount.replace(',', '.').replace(/[^\d.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^(\d+\.\d{2}).*$/, '$1')"
                             class="block w-full py-2 px-3 border border-zinc-200 rounded-lg text-sm focus:border-navyBlue focus:ring-0 outline-none"
-                            :placeholder="cart?.grand_total ? (parseFloat(cart.grand_total) * {{ $exchangeRate }}).toFixed(2) : '0.00'"
+                            :placeholder="
+                                cart?.grand_total
+                                    ? ( '{{ $currentCurrency }}' === 'VES'
+                                        ? parseFloat(cart.grand_total).toFixed(2)
+                                        : (parseFloat(cart.grand_total) * {{ $exchangeRate }}).toFixed(2)
+                                      )
+                                    : '0.00'
+                            "
                         >
                     </div>
                 </div>
