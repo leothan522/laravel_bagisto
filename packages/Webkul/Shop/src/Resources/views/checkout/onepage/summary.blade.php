@@ -355,16 +355,41 @@
                 {{-- Solo mostramos el bloque si logramos determinar que hay una tasa o si estamos en producción --}}
                 @if($vesCurrency || $currentCurrency == 'USD')
                     {{-- Bloque del Monto a Pagar --}}
-                    <div v-if="cart?.grand_total" class="flex justify-between items-center group pt-2 border-t border-zinc-100 mt-2">
+                    {{--<div v-if="cart?.grand_total" class="flex justify-between items-center group pt-2 border-t border-zinc-100 mt-2">
                         <span class="text-zinc-500 text-xs font-bold">@lang('shop::app.checkout.onepage.summary.amount-to-pay'):</span>
                         <div class="flex items-center gap-2">
                             <span class="font-bold text-navyBlue" style="color: #001f3f;">
                                 <span v-text="(parseFloat(cart.grand_total) * {{ $exchangeRate }}).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Bs.'"></span>
                             </span>
-                            {{-- Tu botón de copiar aquí --}}
+                            --}}{{-- Tu botón de copiar aquí --}}{{--
                             <button
                                 type="button"
                                 :data-copy="(cart.grand_total * {{ $exchangeRate }}).toFixed(2)"
+                                class="flex items-center gap-1 text-zinc-400 hover:text-navyBlue transition-all"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                                </svg>
+                                <span class="hidden text-[10px] font-bold uppercase" style="color: #16a34a;">@lang('shop::app.checkout.onepage.summary.copied')</span>
+                            </button>
+                        </div>
+                    </div>--}}
+
+                    <div v-if="cart?.grand_total" class="flex justify-between items-center group pt-2 border-t border-zinc-100 mt-2">
+                        <span class="text-zinc-500 text-xs font-bold">@lang('shop::app.checkout.onepage.summary.amount-to-pay'):</span>
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-navyBlue" style="color: #001f3f;">
+                                <span v-text="
+                                    ( '{{ $currentCurrency }}' === 'VES' )
+                                    ? parseFloat(cart.grand_total).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Bs.'
+                                    : (parseFloat(cart.grand_total) * {{ $exchangeRate }}).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Bs.'
+                                "></span>
+                            </span>
+
+                            <button
+                                type="button"
+                                {{-- También corregimos el data-copy para que el portapapeles tenga el monto correcto --}}
+                                :data-copy="( '{{ $currentCurrency }}' === 'VES' ) ? parseFloat(cart.grand_total).toFixed(2) : (parseFloat(cart.grand_total) * {{ $exchangeRate }}).toFixed(2)"
                                 class="flex items-center gap-1 text-zinc-400 hover:text-navyBlue transition-all"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
