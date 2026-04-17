@@ -257,128 +257,142 @@
 
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.grand_total.after') !!}
 
-    {{--<div
-        v-show="cart.payment_method && (cart.payment_method.method === 'moneytransfer' || cart.payment_method === 'moneytransfer')"
-        class="mt-4 p-4 border border-dashed border-zinc-300 rounded-xl bg-zinc-50"
-        style="display: none;"
-    >
-        <h3 class="text-[11px] font-bold uppercase text-zinc-600 mb-3 tracking-widest">
-            Información de Pago
-        </h3>
-
-        <div class="space-y-2 text-sm">
-            <div class="flex justify-between">
-                <span class="text-zinc-500 text-xs">Banco:</span>
-                <span class="font-medium text-zinc-900">{{ config('app.bank_details.banco') }}</span>
-            </div>
-            <div class="flex justify-between">
-                <span class="text-zinc-500 text-xs">Titular:</span>
-                <span class="font-medium text-zinc-900">{{ config('app.bank_details.titular') }}</span>
-            </div>
-            <div class="flex justify-between">
-                <span class="text-zinc-500 text-xs">N° Cuenta:</span>
-                <span class="font-mono text-xs text-zinc-900">{{ config('app.bank_details.cuenta') }}</span>
-            </div>
-            <div class="flex justify-between">
-                <span class="text-zinc-500 text-xs">Cédula/RIF:</span>
-                <span class="font-medium text-zinc-900">{{ config('app.bank_details.rif') }}</span>
-            </div>
-            <div class="flex justify-between">
-                <span class="text-zinc-500 text-xs">Teléfono (Pago Móvil):</span>
-                <span class="font-medium text-zinc-900">{{ config('app.bank_details.telefono') }}</span>
-            </div>
-        </div>
-    </div>--}}
-
     <div
         v-show="cart.payment_method && (cart.payment_method.method === 'moneytransfer' || cart.payment_method === 'moneytransfer')"
         class="mt-4 p-4 border border-dashed border-zinc-300 rounded-xl bg-zinc-50"
         style="display: none;"
     >
         <h3 class="text-[11px] font-bold uppercase text-zinc-600 mb-3 tracking-widest">
-            Información de Pago
+            @lang('shop::app.checkout.onepage.summary.payment-info')
         </h3>
 
         <div class="space-y-3 text-sm">
             <div class="flex justify-between items-center group">
-                <span class="text-zinc-500 text-xs">Titular:</span>
+                <span class="text-zinc-500 text-xs">@lang('shop::app.checkout.onepage.summary.account-holder'):</span>
                 <div class="flex items-center gap-2">
                     <span class="font-medium text-zinc-900">{{ config('app.bank_details.titular') }}</span>
-                    <button
-                        type="button"
-                        data-copy="{{ config('app.bank_details.titular') }}"
-                        class="flex items-center gap-1 text-zinc-400 hover:text-navyBlue transition-all"
-                    >
+                    <button type="button" data-copy="{{ config('app.bank_details.titular') }}" class="flex items-center gap-1 text-zinc-400 hover:text-navyBlue transition-all">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
                         </svg>
-
-                        <span class="hidden text-[10px] font-bold uppercase" style="color: #16a34a;">
-                        ¡Copiado!
-                        </span>
+                        <span class="hidden text-[10px] font-bold uppercase" style="color: #16a34a;">@lang('shop::app.checkout.onepage.summary.copied')</span>
                     </button>
                 </div>
             </div>
 
             <div class="flex justify-between items-center group">
-                <span class="text-zinc-500 text-xs">N° Cuenta:</span>
+                <span class="text-zinc-500 text-xs">@lang('shop::app.checkout.onepage.summary.account-number'):</span>
                 <div class="flex items-center gap-2">
                     <span class="font-mono text-xs text-zinc-900">{{ config('app.bank_details.cuenta') }}</span>
-                    <button
-                        type="button"
-                        data-copy="{{ config('app.bank_details.cuenta') }}"
-                        class="flex items-center gap-1 text-zinc-400 hover:text-navyBlue transition-all"
-                    >
+                    <button type="button" data-copy="{{ config('app.bank_details.cuenta') }}" class="flex items-center gap-1 text-zinc-400 hover:text-navyBlue transition-all">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
                         </svg>
-
-                        <span class="hidden text-[10px] font-bold uppercase" style="color: #16a34a;">
-                        ¡Copiado!
-                        </span>
+                        <span class="hidden text-[10px] font-bold uppercase" style="color: #16a34a;">@lang('shop::app.checkout.onepage.summary.copied')</span>
                     </button>
                 </div>
             </div>
 
             <div class="flex justify-between items-center group">
-                <span class="text-zinc-500 text-xs">Cédula/RIF:</span>
+                <span class="text-zinc-500 text-xs">@lang('shop::app.checkout.onepage.summary.id-number'):</span>
                 <div class="flex items-center gap-2">
                     <span class="font-medium text-zinc-900">{{ config('app.bank_details.rif') }}</span>
-                    <button
-                        type="button"
-                        data-copy="{{ config('app.bank_details.rif') }}"
-                        class="flex items-center gap-1 text-zinc-400 hover:text-navyBlue transition-all"
-                    >
+                    <button type="button" data-copy="{{ config('app.bank_details.rif') }}" class="flex items-center gap-1 text-zinc-400 hover:text-navyBlue transition-all">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
                         </svg>
-
-                        <span class="hidden text-[10px] font-bold uppercase" style="color: #16a34a;">
-                        ¡Copiado!
-                        </span>
+                        <span class="hidden text-[10px] font-bold uppercase" style="color: #16a34a;">@lang('shop::app.checkout.onepage.summary.copied')</span>
                     </button>
                 </div>
             </div>
 
             <div class="flex justify-between items-center group">
-                <span class="text-zinc-500 text-xs">Teléfono:</span>
+                <span class="text-zinc-500 text-xs">@lang('shop::app.checkout.onepage.summary.phone'):</span>
                 <div class="flex items-center gap-2">
                     <span class="font-medium text-zinc-900">{{ config('app.bank_details.telefono') }}</span>
-                    <button
-                        type="button"
-                        data-copy="{{ config('app.bank_details.telefono') }}"
-                        class="flex items-center gap-1 text-zinc-400 hover:text-navyBlue transition-all"
-                    >
+                    <button type="button" data-copy="{{ config('app.bank_details.telefono') }}" class="flex items-center gap-1 text-zinc-400 hover:text-navyBlue transition-all">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
                         </svg>
-
-                        <span class="hidden text-[10px] font-bold uppercase" style="color: #16a34a;">
-                        ¡Copiado!
-                        </span>
+                        <span class="hidden text-[10px] font-bold uppercase" style="color: #16a34a;">@lang('shop::app.checkout.onepage.summary.copied')</span>
                     </button>
                 </div>
             </div>
+
+
+            @php
+                $currentCurrency = core()->getCurrentCurrencyCode();
+                $cart = cart()->getCart();
+                $grandTotal = $cart ? $cart->grand_total : 0;
+
+                // 1. Intentamos obtener la moneda VES
+                $vesCurrency = app('Webkul\Core\Repositories\CurrencyRepository')->findOneByField('code', 'VES');
+                $exchangeRate = 1;
+
+                if ($vesCurrency) {
+                    $rateRecord = app('Webkul\Core\Repositories\ExchangeRateRepository')->findOneByField('target_currency', $vesCurrency->id);
+                    $exchangeRate = $rateRecord ? $rateRecord->rate : 1;
+                }
+
+                // 2. Calculamos el monto
+                $amountToTransfer = ($currentCurrency == 'VES') ? $grandTotal : ($grandTotal * $exchangeRate);
+                $rawAmount = number_format($amountToTransfer, 2, '.', '');
+
+                // 3. Formateo SEGURO: Si no existe la moneda, formateamos manualmente para evitar el TypeError
+                if ($vesCurrency) {
+                    try {
+                        $formattedAmount = core()->formatPrice($amountToTransfer, 'VES');
+                    } catch (\Exception $e) {
+                        $formattedAmount =  number_format($amountToTransfer, 2, ',', '.') . ' Bs.';
+                    }
+                } else {
+                    $formattedAmount = number_format($amountToTransfer, 2, ',', '.') . ' Bs.';
+                }
+            @endphp
+
+            {{-- Solo mostramos el bloque si logramos determinar que hay una tasa o si estamos en producción --}}
+            @if($vesCurrency || $currentCurrency == 'USD')
+                {{--<div class="flex justify-between items-center group pt-2 border-t border-zinc-100 mt-2">
+                    <span class="text-zinc-500 text-xs font-bold">@lang('shop::app.checkout.onepage.summary.amount-to-pay'):</span>
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-navyBlue" style="color: #001f3f;">{{ $formattedAmount }}</span>
+                        <button type="button" data-copy="{{ $rawAmount }}" class="flex items-center gap-1 text-zinc-400 hover:text-navyBlue transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                            </svg>
+                            <span class="hidden text-[10px] font-bold uppercase" style="color: #16a34a;">@lang('shop::app.checkout.onepage.summary.copied')</span>
+                        </button>
+                    </div>
+                </div>--}}
+
+                <div class="flex justify-between items-center group pt-2 border-t border-zinc-100 mt-2">
+                    <span class="text-zinc-500 text-xs font-bold">@lang('shop::app.checkout.onepage.summary.amount-to-pay'):</span>
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-navyBlue" style="color: #001f3f;">
+                            <span v-text="(cart.grand_total * {{ $exchangeRate }}).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Bs.'"></span>
+                        </span>
+                        <button
+                            type="button"
+                            :data-copy="(cart.grand_total * {{ $exchangeRate }}).toFixed(2)"
+                            class="flex items-center gap-1 text-zinc-400 hover:text-navyBlue transition-all"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                            </svg>
+                            <span class="hidden text-[10px] font-bold uppercase" style="color: #16a34a;">@lang('shop::app.checkout.onepage.summary.copied')</span>
+                        </button>
+                    </div>
+                </div>
+
+                @if($currentCurrency == 'USD' && $vesCurrency)
+                    <div class="flex justify-end mt-1">
+                    <span class="text-[10px] text-zinc-400 italic">
+                        @lang('shop::app.checkout.onepage.summary.exchange-rate', ['rate' => number_format($exchangeRate, 2)])
+                    </span>
+                    </div>
+                @endif
+            @endif
+
         </div>
     </div>
 
@@ -391,28 +405,28 @@
     >
         <div class="grid gap-4">
             <p class="text-sm font-bold text-navyBlue uppercase tracking-wide">
-                @lang('Datos de la Transferencia')
+                @lang('shop::app.checkout.onepage.summary.transfer-data')
             </p>
 
             <div class="grid gap-1.5">
                 <label class="text-[11px] font-bold uppercase text-zinc-600 required">
-                    @lang('Banco de Origen')
+                    @lang('shop::app.checkout.onepage.summary.bank-origin')
                 </label>
                 <select
                     v-model="cart.bank_name"
                     class="block w-full py-2 px-3 border border-zinc-200 rounded-lg text-sm bg-white focus:border-navyBlue focus:ring-0 outline-none"
                 >
-                    <option value="">@lang('Seleccione un banco')</option>
+                    <option value="" disabled selected>@lang('shop::app.checkout.onepage.summary.select-bank')</option>
                     <option value="Banesco">Banesco</option>
                     <option value="Mercantil">Mercantil</option>
                     <option value="Provincial">Provincial</option>
                     <option value="BDV">Banco de Venezuela</option>
-                    <option value="Otro">Otro / Pago Móvil</option>
+                    <option value="Otro">@lang('shop::app.checkout.onepage.summary.other-payment')</option>
                 </select>
             </div>
 
             <div class="flex gap-4">
-                <div class="grid gap-1.5 w-1/2">
+                {{--<div class="grid gap-1.5 w-1/2">
                     <label class="text-[11px] font-bold uppercase text-zinc-600 required">
                         @lang('Referencia')
                     </label>
@@ -422,18 +436,72 @@
                         class="block w-full py-2 px-3 border border-zinc-200 rounded-lg text-sm focus:border-navyBlue focus:ring-0 outline-none"
                         placeholder="Ej: 001234"
                     >
-                </div>
+                </div>--}}
 
                 <div class="grid gap-1.5 w-1/2">
                     <label class="text-[11px] font-bold uppercase text-zinc-600 required">
-                        @lang('Monto Pagado')
+                        @lang('shop::app.checkout.onepage.summary.reference')
+                    </label>
+                    <input
+                        type="text"
+                        v-model="cart.bank_reference"
+                        inputmode="numeric"
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                        class="block w-full py-2 px-3 border border-zinc-200 rounded-lg text-sm focus:border-navyBlue focus:ring-0 outline-none"
+                        placeholder="Ej: 001234"
+                    >
+                </div>
+                {{--<div class="grid gap-1.5 w-1/2">
+                    <label class="text-[11px] font-bold uppercase text-zinc-600 required">
+                        @lang('shop::app.checkout.onepage.summary.amount-paid')
                     </label>
                     <input
                         type="number"
                         step="0.01"
+                        min="0"
                         v-model="cart.bank_amount"
+                        oninput="if(this.value < 0) this.value = 0;"
                         class="block w-full py-2 px-3 border border-zinc-200 rounded-lg text-sm focus:border-navyBlue focus:ring-0 outline-none"
-                        :placeholder="Number(cart.grand_total).toFixed(2)"
+                        placeholder="{{ $rawAmount }}"
+                    >
+                </div>--}}
+                {{--<div class="grid gap-1.5 w-1/2">
+                    <label class="text-[11px] font-bold uppercase text-zinc-600 required">
+                        @lang('shop::app.checkout.onepage.summary.amount-paid')
+                    </label>
+
+                    <input
+                        type="text"
+                        inputmode="decimal"
+                        v-model="cart.bank_amount"
+                        @input="
+            let val = cart.bank_amount.replace(',', '.').replace(/[^0-9.]/g, ''); // Cambia coma por punto y quita letras
+            if (val.startsWith('.')) val = '0' + val;                            // Si empieza con . pone 0.
+            const parts = val.split('.');
+            if (parts.length > 2) val = parts[0] + '.' + parts[1];               // Solo permite un punto
+            if (parts[1] && parts[1].length > 2) val = parts[0] + '.' + parts[1].slice(0, 2); // Máximo 2 decimales
+            cart.bank_amount = val;
+        "
+                        @paste="setTimeout(() => {
+            let val = cart.bank_amount.replace(',', '.').replace(/[^0-9.]/g, '');
+            // ... (misma lógica de arriba para limpiar al pegar)
+            cart.bank_amount = val;
+        }, 0)"
+                        class="block w-full py-2 px-3 border border-zinc-200 rounded-lg text-sm focus:border-navyBlue focus:ring-0 outline-none"
+                        placeholder="{{ $rawAmount }}"
+                    >
+                </div>--}}
+                <div class="grid gap-1.5 w-1/2">
+                    <label class="text-[11px] font-bold uppercase text-zinc-600 required">
+                        @lang('shop::app.checkout.onepage.summary.amount-paid')
+                    </label>
+                    <input
+                        type="text"
+                        inputmode="decimal"
+                        v-model="cart.bank_amount"
+                        @input="cart.bank_amount = cart.bank_amount.replace(',', '.').replace(/[^\d.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^(\d+\.\d{2}).*$/, '$1')"
+                        class="block w-full py-2 px-3 border border-zinc-200 rounded-lg text-sm focus:border-navyBlue focus:ring-0 outline-none"
+                        :placeholder="(cart.grand_total * {{ $exchangeRate }}).toFixed(2)"
                     >
                 </div>
             </div>
@@ -443,49 +511,12 @@
                 class="text-[10px] text-red-600 font-medium bg-red-50 p-2 rounded-md border border-red-100"
             >
             <i class="icon-information text-sm"></i>
-            @lang('Todos los campos de pago son obligatorios para procesar su orden.')
+            @lang('shop::app.checkout.onepage.summary.payment-required')
         </span>
         </div>
     </div>
 
 </div>
-
-{{--@pushOnce('scripts')
-    <script>
-        document.addEventListener('click', function (e) {
-            // Detectar el clic en cualquier elemento que tenga data-copy
-            const target = e.target.closest('[data-copy]');
-
-            if (target) {
-                const textToCopy = target.getAttribute('data-copy');
-
-                if (!navigator.clipboard) {
-                    const textArea = document.createElement("textarea");
-                    textArea.value = textToCopy;
-                    document.body.appendChild(textArea);
-                    textArea.select();
-                    document.execCommand("copy");
-                    document.body.removeChild(textArea);
-                } else {
-                    navigator.clipboard.writeText(textToCopy);
-                }
-
-                // Feedback visual
-                const span = target.querySelector('span');
-                if (span) {
-                    const originalText = span.innerText;
-                    span.innerText = '¡Copiado!';
-                    span.style.color = '#16a34a'; // verde-600
-
-                    setTimeout(() => {
-                        span.innerText = originalText;
-                        span.style.color = '';
-                    }, 2000);
-                }
-            }
-        });
-    </script>
-@endPushOnce--}}
 
 @pushOnce('scripts')
     <script>

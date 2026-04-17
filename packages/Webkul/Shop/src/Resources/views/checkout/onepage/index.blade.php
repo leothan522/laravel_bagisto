@@ -119,11 +119,19 @@
                             </template>
 
                             <template v-else>
-                                <x-shop::button
+                                {{--<x-shop::button
                                     type="button"
                                     class="primary-button w-max rounded-2xl bg-navyBlue px-11 py-3 max-md:mb-4 max-md:w-full max-md:max-w-full max-md:rounded-lg max-sm:py-1.5"
                                     :title="trans('shop::app.checkout.onepage.summary.place-order')"
                                     ::disabled="isPlacingOrder || (cart.payment_method && (cart.payment_method == 'moneytransfer' || cart.payment_method.method == 'moneytransfer') && (!cart.bank_name || !cart.bank_reference || !cart.bank_amount))"
+                                    ::loading="isPlacingOrder"
+                                    @click="placeOrder"
+                                />--}}
+                                <x-shop::button
+                                    type="button"
+                                    class="primary-button w-max rounded-2xl bg-navyBlue px-11 py-3 max-md:mb-4 max-md:w-full max-md:max-w-full max-md:rounded-lg max-sm:py-1.5"
+                                    :title="trans('shop::app.checkout.onepage.summary.place-order')"
+                                    ::disabled="isPlacingOrder || !isPaymentValid"
                                     ::loading="isPlacingOrder"
                                     @click="placeOrder"
                                 />
@@ -159,6 +167,26 @@
                         paymentMethods: null,
 
                         canPlaceOrder: false,
+                    }
+                },
+
+                // <--- AQUÍ DEBES AGREGAR LA PROPIEDAD COMPUTADA --->
+                computed: {
+                    isPaymentValid() {
+                        if (! this.cart) return false;
+
+                        let method = typeof this.cart.payment_method === 'object'
+                            ? this.cart.payment_method.method
+                            : this.cart.payment_method;
+
+                        if (method !== 'moneytransfer') return true;
+
+                        // Verificamos que los tres campos existan y no estén vacíos
+                        const hasBank = this.cart.bank_name && this.cart.bank_name.toString().trim() !== '';
+                        const hasRef  = this.cart.bank_reference && this.cart.bank_reference.toString().trim() !== '';
+                        const hasAmt  = this.cart.bank_amount && this.cart.bank_amount.toString().trim() !== '';
+
+                        return hasBank && hasRef && hasAmt;
                     }
                 },
 
