@@ -119,14 +119,6 @@
                             </template>
 
                             <template v-else>
-                                {{--<x-shop::button
-                                    type="button"
-                                    class="primary-button w-max rounded-2xl bg-navyBlue px-11 py-3 max-md:mb-4 max-md:w-full max-md:max-w-full max-md:rounded-lg max-sm:py-1.5"
-                                    :title="trans('shop::app.checkout.onepage.summary.place-order')"
-                                    ::disabled="isPlacingOrder || (cart.payment_method && (cart.payment_method == 'moneytransfer' || cart.payment_method.method == 'moneytransfer') && (!cart.bank_name || !cart.bank_reference || !cart.bank_amount))"
-                                    ::loading="isPlacingOrder"
-                                    @click="placeOrder"
-                                />--}}
                                 <x-shop::button
                                     type="button"
                                     class="primary-button w-max rounded-2xl bg-navyBlue px-11 py-3 max-md:mb-4 max-md:w-full max-md:max-w-full max-md:rounded-lg max-sm:py-1.5"
@@ -173,20 +165,29 @@
                 // <--- AQUÍ DEBES AGREGAR LA PROPIEDAD COMPUTADA --->
                 computed: {
                     isPaymentValid() {
-                        if (! this.cart) return false;
+                        // 1. Si no hay carrito o no hay método, el botón se bloquea (false)
+                        if (! this.cart || ! this.cart.payment_method) return false;
 
+                        // 2. Obtenemos el código del método de forma segura
                         let method = typeof this.cart.payment_method === 'object'
-                            ? this.cart.payment_method.method
+                            ? this.cart.payment_method?.method
                             : this.cart.payment_method;
 
-                        if (method !== 'moneytransfer') return true;
+                        // 3. Si el método aún no se ha definido, bloqueamos
+                        if (! method) return false;
 
-                        // Verificamos que los tres campos existan y no estén vacíos
-                        const hasBank = this.cart.bank_name && this.cart.bank_name.toString().trim() !== '';
-                        const hasRef  = this.cart.bank_reference && this.cart.bank_reference.toString().trim() !== '';
-                        const hasAmt  = this.cart.bank_amount && this.cart.bank_amount.toString().trim() !== '';
+                        // 4. LÓGICA PARA TRANSFERENCIA BANCARIA
+                        if (method === 'moneytransfer') {
+                            // Validamos que existan los campos y tengan contenido real
+                            const hasBank = !!(this.cart.bank_name && this.cart.bank_name.toString().trim());
+                            const hasRef  = !!(this.cart.bank_reference && this.cart.bank_reference.toString().trim());
+                            const hasAmt  = !!(this.cart.bank_amount && this.cart.bank_amount.toString().trim());
 
-                        return hasBank && hasRef && hasAmt;
+                            return hasBank && hasRef && hasAmt;
+                        }
+
+                        // 5. Para cualquier otro método (PayPal, Cash on Delivery, etc.), habilitamos por defecto
+                        return true;
                     }
                 },
 
@@ -252,8 +253,12 @@
                         // Preparamos los datos adicionales
                         let paymentData = {};
 
-                        // Verificamos si es transferencia
-                        if (this.cart.payment_method == 'moneytransfer' || this.cart.payment_method?.method == 'moneytransfer') {
+                        // Usamos ?. para verificar el método con total seguridad
+                        let method = typeof this.cart?.payment_method === 'object'
+                            ? this.cart.payment_method?.method
+                            : this.cart?.payment_method;
+
+                        if (method === 'moneytransfer') {
                             paymentData = {
                                 bank_name: this.cart.bank_name,
                                 bank_reference: this.cart.bank_reference,
