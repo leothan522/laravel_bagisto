@@ -16,6 +16,12 @@
 
         <title>{{ $title ?? '' }}</title>
 
+        {{-- Favicon y PWA --}}
+        <link rel="manifest" href="{{ asset('manifest.json') }}">
+        <link rel="apple-touch-icon" href="{{ asset('favicons/favicon-128x128.png') }}">
+        <meta name="theme-color" content="#a60a6a">
+
+
         <meta charset="UTF-8">
 
         <meta
@@ -39,8 +45,8 @@
             name="currency"
             content="{{ core()->getCurrentCurrency()->toJson() }}"
         >
-        <meta 
-            name="generator" 
+        <meta
+            name="generator"
             content="Bagisto"
         >
 
@@ -164,6 +170,17 @@
 
         <script type="text/javascript">
             {!! core()->getConfigData('general.content.custom_scripts.custom_javascript') !!}
+        </script>
+
+        {{-- Service Worker --}}
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register("{{ asset('service-worker.js') }}")
+                        .then(reg => console.log('✅ Service Worker registrado en:', reg.scope))
+                        .catch(err => console.error('⚠️ Error al registrar el Service Worker:', err));
+                });
+            }
         </script>
     </body>
 </html>
