@@ -1,3 +1,11 @@
 *
+!admins/
+!category/
+!configuration/
 !data-transfer
+!locales/
+!product/
+!product-search/
+!review/
+!theme/
 !.gitignore
