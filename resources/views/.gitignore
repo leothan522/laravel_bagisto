@@ -1,3 +1,4 @@
 *
 !vendor/
+!install-app.blade.php
 !.gitignore
