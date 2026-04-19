@@ -205,5 +205,7 @@ return [
 
     'color_pink_logo' => env('COLOR_PINK_LOGO', '#a60a6a'),
     'color_blue_dark' => env('COLOR_BLUE_DARK', '#0a016d'),
+    'manifest_background_color' => env('MANIFEST_BACKGROUND_COLOR', '#ffffff'),
+    'manifest_asset_favicons' => env('MANIFEST_ASSET_FAVICONS', ''),
 
 ];

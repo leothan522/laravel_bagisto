@@ -17,9 +17,17 @@
         <title>{{ $title ?? '' }}</title>
 
         {{-- Favicon y PWA --}}
-        <link rel="manifest" href="{{ asset('manifest.json') }}">
-        <link rel="apple-touch-icon" href="{{ asset('favicons/favicon-128x128.png') }}">
-        <meta name="theme-color" content="#a60a6a">
+        <link rel="manifest" href="{{ url('/manifest.json') }}">
+        @php
+            $assetFavicons = config('app.manifest_asset_favicons');
+            $favicon = asset('favicons/favicon-128x128.png');
+            if (! empty($assetFavicons)) {
+                if (File::exists('favicons/'.$assetFavicons.'/favicon-128x128.png')) {
+                    $favicon = asset('favicons/'.$assetFavicons.'/favicon-128x128.png');
+                }
+            }
+        @endphp
+        <link rel="apple-touch-icon" href="{{ $favicon}}">
 
 
         <meta charset="UTF-8">
