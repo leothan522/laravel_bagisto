@@ -207,5 +207,6 @@ return [
     'color_blue_dark' => env('COLOR_BLUE_DARK', '#0a016d'),
     'manifest_background_color' => env('MANIFEST_BACKGROUND_COLOR', '#ffffff'),
     'manifest_asset_favicons' => env('MANIFEST_ASSET_FAVICONS', ''),
+    'qr_instalar_app' => env('QR_INSTALAR_APP', ''),
 
 ];

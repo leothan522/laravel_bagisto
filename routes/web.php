@@ -147,7 +147,17 @@ self.addEventListener('fetch', event => {
 });
 
 Route::get('/instalar-app', function () {
+
+    // Lógica dinámica para el archivo offline
+    $assetFavicons = config('app.manifest_asset_favicons');
+    $qrPath = config('app.qr_instalar_app');
     $qrIos = qrCodeGenerate(\url('/'), 80, null, 'qr-ios-download');
+    if (! empty($assetFavicons) && ! empty($qrPath)) {
+        $customPath = 'favicons/'.$assetFavicons.'/'.$qrPath;
+        if (File::exists(public_path($customPath))) {
+            $qrIos = asset($customPath);
+        }
+    }
 
     // Obtenemos el repositorio desde el contenedor de servicios
     $categoryRepository = app(CategoryRepository::class);
