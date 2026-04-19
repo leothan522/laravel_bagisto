@@ -203,4 +203,7 @@ return [
         'telefono' => env('MONEY_TRANSFER_TELEFONO'),
     ],
 
+    'color_pink_logo' => env('COLOR_PINK_LOGO', '#a60a6a'),
+    'color_blue_dark' => env('COLOR_BLUE_DARK', '#0a016d'),
+
 ];

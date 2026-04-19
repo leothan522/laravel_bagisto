@@ -105,7 +105,10 @@
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
             "Webkul\\User\\": "packages/Webkul/User/src"
-        }
+        },
+        "files": [
+            "app/Http/Funciones/Funciones.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

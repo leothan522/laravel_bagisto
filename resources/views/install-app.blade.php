@@ -4,8 +4,8 @@
     @push('styles')
         <style>
             :root {
-                --pink-logo: #a60a6a;
-                --blue-dark: #0a016d;
+                --pink-logo: {{ config('app.color_pink_logo') }};
+                --blue-dark: {{ config('app.color_blue_dark') }};
             }
             .pink-brand-text { color: var(--pink-logo) !important; }
             .blue-brand-text { color: var(--blue-dark) !important; }
@@ -74,11 +74,39 @@
         {{-- Header --}}
         <div style="padding: 40px; text-align: center; border-bottom: 1px solid #eee;">
             <h1 style="font-size: 32px; text-transform: uppercase; letter-spacing: normal !important; margin: 0; display: block !important;">
-                <span class="pink-brand-text" style="font-weight: 900; margin-right: 8px !important;">Pink</span>
-                <span style="color: #0a016d !important; font-weight: 700;">Shop's</span>
+                {{--<span class="pink-brand-text" style="font-weight: 900; margin-right: 8px !important;">Pink</span>
+                <span class="blue-brand-text" style="font-weight: 700;">Shop's</span>--}}
+                @php
+                    $appName = config('app.name', 'Pink Shop\'s');
+                    $parts = explode(' ', $appName, 2); // Dividimos en máximo 2 partes
+                @endphp
+
+
+                {{-- Primera palabra (siempre existe) --}}
+                <span class="pink-brand-text" style="font-weight: 900; margin-right: 8px !important;">
+                    {{ $parts[0] }}
+                </span>
+
+                {{-- Segunda palabra (solo si existe en el APP_NAME) --}}
+                @if(isset($parts[1]))
+                    <span class="blue-brand-text" style="font-weight: 700;">
+                    {{ $parts[1] }}
+                    </span>
+                @endif
+
             </h1>
             <div style="margin-top: 15px; font-size: 11px; font-weight: bold; color: #999; letter-spacing: 3px; text-transform: uppercase;">
-                Peluches <span class="pink-brand-text">•</span> Bisutería <span class="pink-brand-text">•</span> Maquillaje <span class="pink-brand-text">•</span> Papelería
+                @foreach($categories as $category)
+                    {{-- Nombre de la categoría --}}
+                    <span>
+                        {{ $category->name }}
+                    </span>
+
+                    {{-- Solo mostramos el punto si NO es el último elemento --}}
+                    @if (!$loop->last)
+                        <span class="pink-brand-text opacity-60">•</span>
+                    @endif
+                @endforeach
             </div>
         </div>
 
@@ -88,7 +116,7 @@
             {{-- QR --}}
             <div class="qr-section">
                 <div class="qr-boutique-box">
-                    <img src="{{ asset('img/qr-ios-download.svg') }}"
+                    <img src="{{ $qrIos }}"
                          style="width: 240px; height: 240px; display: block;" alt="QR link de {{ config('app.name') }}">
                 </div>
                 <p style="font-size: 10px; font-weight: 900; color: #bbb; letter-spacing: 2px; text-transform: uppercase; margin-top: 10px;">
